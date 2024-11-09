@@ -88,6 +88,7 @@ const app = express();
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
+const { ObjectId } = mongoose.Types;
 
 // Middleware para parsear el cuerpo de las solicitudes en JSON
 app.use(express.json());
@@ -100,8 +101,8 @@ mongoose.connect('mongodb://localhost:27017/mi_lista_tareas', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log('Conectado a MongoDB'))
-.catch((error) => console.error('Error al conectar a MongoDB:', error));
+    .then(() => console.log('Conectado a MongoDB'))
+    .catch((error) => console.error('Error al conectar a MongoDB:', error));
 
 // Definir el esquema y el modelo de tarea
 const tareaSchema = new Schema({
@@ -141,61 +142,75 @@ app.post('/api/tareas', async (req, res) => {
     }
 });
 
-// // 3. Eliminar una tarea por ID desde la base de datos
-// app.delete('/api/tareas/:id', async (req, res) => {
-//     const { id } = req.params;
+// 3. Eliminar una tarea por ID desde la base de datos
+app.delete('/api/tareas/:id', async (req, res) => {
+    const { id } = req.params;
 
-//     try {
-//         const tareaEliminada = await Tarea.findOneAndDelete({ id });
+    // Comprobar si el id es válido como ObjectId
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+    }
 
-//         if (!tareaEliminada) {
-//             return res.status(404).json({ mensaje: "Tarea no encontrada." });
-//         }
+    try {
+        const tareaEliminada = await Tarea.findByIdAndDelete(id);
 
-//         res.status(200).json({ mensaje: `Tarea con id ${id} eliminada correctamente.` });
-//     } catch (error) {
-//         res.status(500).json({ mensaje: "Error al eliminar la tarea", error });
-//     }
-// });
+        if (!tareaEliminada) {
+            return res.status(404).json({ mensaje: "Tarea no encontrada." });
+        }
 
-// // 4. Editar una tarea por ID en la base de datos
-// app.put('/api/tareas/:id', async (req, res) => {
-//     const { id } = req.params;
-//     const { titulo, descripcion } = req.body;
+        res.status(200).json({ mensaje: `Tarea con id ${id} eliminada correctamente.` });
+    } catch (error) {
+        res.status(500).json({ mensaje: "Error al eliminar la tarea", error });
+    }
+});
 
-//     try {
-//         const tareaActualizada = await Tarea.findOneAndUpdate(
-//             { id },
-//             { titulo, descripcion },
-//             { new: true, runValidators: true }
-//         );
+// 4. Editar una tarea por ID en la base de datos
+app.put('/api/tareas/:id', async (req, res) => {
+    const { id } = req.params;
+    const { titulo, descripcion } = req.body;
 
-//         if (!tareaActualizada) {
-//             return res.status(404).json({ mensaje: "Tarea no encontrada." });
-//         }
+    // Comprobar si el id es válido como ObjectId
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+    }
 
-//         res.status(200).json(tareaActualizada);
-//     } catch (error) {
-//         res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
-//     }
-// });
+    try {
+        // Usamos findByIdAndUpdate para buscar y actualizar la tarea por _id
+        const tareaActualizada = await Tarea.findByIdAndUpdate(
+            id,  // Aquí usamos el id directamente
+            { titulo, descripcion },  // Campos a actualizar
+            { new: true, runValidators: true }  // Retornar el documento actualizado y ejecutar validaciones
+        );
 
-// // 5. Obtener una tarea específica por ID desde la base de datos
-// app.get('/api/tareas/:id', async (req, res) => {
-//     const { id } = req.params;
+        if (!tareaActualizada) {
+            return res.status(404).json({ mensaje: "Tarea no encontrada." });
+        }
 
-//     try {
-//         const tarea = await Tarea.findOne({ id });
+        res.status(200).json(tareaActualizada);
+    } catch (error) {
+        res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
+    }
+});
 
-//         if (!tarea) {
-//             return res.status(404).json({ mensaje: "Tarea no encontrada." });
-//         }
+// 5. Obtener una tarea específica por ID desde la base de datos
+app.get('/api/tareas/:id', async (req, res) => {
+    const { id } = req.params;
+    // Comprobar si el id es válido como ObjectId
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+    }
+    try {
+        const tarea = await Tarea.findById(id);
 
-//         res.json(tarea);
-//     } catch (error) {
-//         res.status(500).json({ mensaje: "Error al obtener la tarea", error });
-//     }
-// });
+        if (!tarea) {
+            return res.status(404).json({ mensaje: "Tarea no encontrada." });
+        }
+
+        res.json(tarea);
+    } catch (error) {
+        res.status(500).json({ mensaje: "Error al obtener la tarea", error });
+    }
+});
 
 // Iniciar el servidor
 app.listen(PORT, () => {
