@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Lista de Tareas</h1>
+  
+    <!-- Formulario para agregar tarea -->
+    <form (ngSubmit)="agregarTarea()">
+        <input [(ngModel)]="nuevaTarea.titulo" name="titulo" placeholder="Título" required>
+        <textarea [(ngModel)]="nuevaTarea.descripcion" name="descripcion" placeholder="Descripción" required></textarea>
+        <button type="submit">Agregar Tarea</button>
+      </form>
+      
+    <!-- Lista de tareas -->
+    <ul>
+      <li *ngFor="let tarea of tareas">
+        <h2>{{ tarea.titulo }}</h2>
+        <p>{{ tarea.descripcion }}</p>
+        <button (click)="editarTarea(tarea)">Editar</button>
+        <button (click)="eliminarTarea(tarea.id)">Eliminar</button>
+      </li>
+    </ul>
+  </div>
+  

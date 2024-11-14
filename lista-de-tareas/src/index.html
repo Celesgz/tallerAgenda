@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <title>ListaDeTareas</title>
@@ -8,6 +8,18 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <!-- Enlace de navegación -->
+  <nav>
+    <ul>
+      <li><a routerLink="/tareas" routerLinkActive="active">Lista de Tareas</a></li>
+    </ul>
+  </nav>
+
+  <!-- Componente raíz de Angular -->
   <app-root></app-root>
+
+  <!-- Scripts -->
+  <script src="polyfills.js" type="module"></script>
+  <script src="main.js" type="module"></script>
 </body>
 </html>
