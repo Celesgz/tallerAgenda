@@ -6,12 +6,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-tareas',
   templateUrl: './tareas.component.html',
+  styleUrls: ['./tareas.component.css'],
   standalone: true,  // Asegúrate de marcarlo como standalone
   imports: [FormsModule, CommonModule]  // Agregar FormsModule en la propiedad 'imports'
 })
 export class TareasComponent implements OnInit {
   tareas: Tarea[] = [];
-  nuevaTarea: Tarea = { titulo: '', descripcion: '' };
+  nuevaTarea: Tarea = { titulo: '', descripcion: '', completada: false };
   tareaAEditar: Tarea | null = null;
 
   constructor(private tareaService: TareaService) { }
@@ -33,7 +34,7 @@ export class TareasComponent implements OnInit {
     // } else {
     this.tareaService.crearTarea(this.nuevaTarea).subscribe(() => {
       this.obtenerTareas();
-      this.nuevaTarea = { titulo: '', descripcion: '' };
+      this.nuevaTarea = { titulo: '', descripcion: '' ,completada: false };
     });
     // }
   }
@@ -58,4 +59,16 @@ export class TareasComponent implements OnInit {
       });
     }
   }
+
+  marcarComoCompletada(tarea: Tarea): void {
+    if (tarea.id !== undefined) {  // Verifica si id está definido
+      tarea.completada = true;  // Marca la tarea como completada
+      this.tareaService.actualizarTarea(tarea.id, tarea).subscribe(() => {
+        this.obtenerTareas();  // Actualiza la lista de tareas
+      });
+    } else {
+      console.error('ID de tarea no válido');
+    }
+  }
+  
 }

@@ -1,0 +1,208 @@
+/* Estilo general */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #8c52ff, #a768c0, #cc6fbd, #ff914dcc);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Barra de navegación superior */
+.top-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #473699d7;
+    padding: 10px 20px;
+    color: white;
+    width: 100%;
+    border-bottom: 1px solid #858585;
+}
+
+.top-navbar .logo {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+}
+
+.top-navbar .logo img {
+    width: 20px;
+    height: 20px;
+}
+
+.top-navbar .icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Barra de navegación secundaria */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6e4c94;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.navbar h1 {
+    color: white;
+    font-size: 20px;
+    margin: 0;
+}
+
+.navbar .menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar .icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.8;
+}
+
+/* Tablero */
+.board {
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    justify-content: center;
+}
+
+/* Columna */
+.column {
+    width: 100%;
+    max-width: 600px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.column h2 {
+    font-size: 16px;
+    color: #363636;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: none; /* Quitar los puntos */
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 15px;
+}
+
+/* Tarjeta */
+.card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+.task-icon {
+    font-size: 18px;
+}
+
+
+
+.task-header {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.task-header h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0 10px 0; 
+    font-size: 14px;
+    color: #555; 
+}
+
+.task-footer {
+    display: flex;
+    gap: 10px; 
+    margin-top: 10px; 
+}
+
+
+/* Botones */
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(1);
+}
+
+button:nth-child(1) {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+
+button:nth-child(2) {
+    background-color: #ffc107; /* Amarillo */
+    color: black;
+}
+
+button:nth-child(3) {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+}
+.delete button{
+    background-color: #dc3545; /* Rojo */
+    color: white;
+}

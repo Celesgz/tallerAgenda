@@ -104,10 +104,7 @@ app.use(cors({
 const PORT = process.env.PORT || 3000;
 
 // Conectar a MongoDB
-mongoose.connect('mongodb://localhost:27017/mi_lista_tareas', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect('mongodb://localhost:27017/mi_lista_tareas')
     .then(() => console.log('Conectado a MongoDB'))
     .catch((error) => console.error('Error al conectar a MongoDB:', error));
 
