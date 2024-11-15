@@ -84,6 +84,7 @@
 
 // Importamos Express
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
@@ -92,6 +93,12 @@ const { ObjectId } = mongoose.Types;
 
 // Middleware para parsear el cuerpo de las solicitudes en JSON
 app.use(express.json());
+
+app.use(cors({
+    origin: 'http://localhost:4200', // Permite solo este origen
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'] // Encabezados permitidos
+}))
 
 // Configuramos el puerto
 const PORT = process.env.PORT || 3000;

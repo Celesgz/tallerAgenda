@@ -2,20 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { TareaService } from '../../services/tarea.service';
 import { Tarea } from '../../models/tarea.model';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
-import { NgFor } from '@angular/common';
-import { AppComponent } from '../../app.component';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-tareas',
   templateUrl: './tareas.component.html',
   standalone: true,  // Asegúrate de marcarlo como standalone
-  imports: [FormsModule, NgFor]
+  imports: [FormsModule, CommonModule]  // Agregar FormsModule en la propiedad 'imports'
 })
 export class TareasComponent implements OnInit {
   tareas: Tarea[] = [];
   nuevaTarea: Tarea = { titulo: '', descripcion: '' };
   tareaAEditar: Tarea | null = null;
 
-  constructor(private tareaService: TareaService) {}
+  constructor(private tareaService: TareaService) { }
 
   ngOnInit(): void {
     this.obtenerTareas();
@@ -26,34 +25,37 @@ export class TareasComponent implements OnInit {
   }
 
   agregarTarea(): void {
-    if (this.tareaAEditar && this.tareaAEditar.id) {  
+    // if (this.tareaAEditar && this.tareaAEditar.id) {
+    //   this.tareaService.actualizarTarea(this.tareaAEditar.id, this.tareaAEditar).subscribe(() => {
+    //     this.obtenerTareas();
+    //     this.tareaAEditar = null;
+    //   });
+    // } else {
+    this.tareaService.crearTarea(this.nuevaTarea).subscribe(() => {
+      this.obtenerTareas();
+      this.nuevaTarea = { titulo: '', descripcion: '' };
+    });
+    // }
+  }
+
+  editarTarea(tarea: Tarea): void {
+    if (this.tareaAEditar && this.tareaAEditar.id) {
       this.tareaService.actualizarTarea(this.tareaAEditar.id, this.tareaAEditar).subscribe(() => {
         this.obtenerTareas();
         this.tareaAEditar = null;
       });
-    } else {
-      this.tareaService.crearTarea(this.nuevaTarea).subscribe(() => {
-        this.obtenerTareas();
-        this.nuevaTarea = { titulo: '', descripcion: '' };
-      });
     }
-  }
-
-  editarTarea(tarea: Tarea): void {
-    this.tareaAEditar = { ...tarea };
   }
 
   cancelarEdicion(): void {
     this.tareaAEditar = null;
   }
 
-  eliminarTarea(id: number | undefined): void {
-    if (id === undefined) {
-      console.warn("ID no válido para eliminar la tarea");
-      return;
+  eliminarTarea(id: number): void {
+    if (!id === undefined) {
+      this.tareaService.eliminarTarea(id).subscribe(() => {
+        this.obtenerTareas();
+      });
     }
-    this.tareaService.eliminarTarea(id).subscribe(() => {
-      this.obtenerTareas();
-    });
   }
 }
