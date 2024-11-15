@@ -1,21 +1,23 @@
 <div class="container">
-    <h1>Lista de Tareas</h1>
-  
-    <!-- Formulario para agregar tarea -->
-    <form (ngSubmit)="agregarTarea()">
-        <input [(ngModel)]="nuevaTarea.titulo" name="titulo" placeholder="Título" required>
-        <textarea [(ngModel)]="nuevaTarea.descripcion" name="descripcion" placeholder="Descripción" required></textarea>
-        <button type="submit">Agregar Tarea</button>
-      </form>
-      
-    <!-- Lista de tareas -->
+  <h1>Lista de Tareas</h1>
+
+  <!-- Formulario para agregar tarea -->
+  <form (ngSubmit)="agregarTarea()">
+    <input [(ngModel)]="nuevaTarea.titulo" name="titulo" placeholder="Título" required>
+    <textarea [(ngModel)]="nuevaTarea.descripcion" name="descripcion" placeholder="Descripción" required></textarea>
+    <button type="submit">Agregar Tarea</button>
+  </form>
+
+  <!-- Lista de tareas -->
+  <div *ngIf="tareas.length > 0 ; else SinTareas">
     <ul>
       <li *ngFor="let tarea of tareas">
         <h2>{{ tarea.titulo }}</h2>
         <p>{{ tarea.descripcion }}</p>
         <button (click)="editarTarea(tarea)">Editar</button>
-        <button (click)="eliminarTarea(tarea.id)">Eliminar</button>
+        <button *ngIf="tarea.id !== undefined" (click)="eliminarTarea(tarea.id)">Eliminar</button>
       </li>
     </ul>
   </div>
-  
+  <ng-template #SinTareas>No hay tareas</ng-template>
+</div>
