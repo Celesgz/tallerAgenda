@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { TareaService } from '../../services/tarea.service';
 import { Tarea } from '../../models/tarea.model';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
-
+import { NgFor } from '@angular/common';
+import { AppComponent } from '../../app.component';
 @Component({
   selector: 'app-tareas',
   templateUrl: './tareas.component.html',
   standalone: true,  // Asegúrate de marcarlo como standalone
-  imports: [FormsModule]  // Agregar FormsModule en la propiedad 'imports'
+  imports: [FormsModule, NgFor]
 })
 export class TareasComponent implements OnInit {
   tareas: Tarea[] = [];
@@ -46,7 +47,11 @@ export class TareasComponent implements OnInit {
     this.tareaAEditar = null;
   }
 
-  eliminarTarea(id: number): void {
+  eliminarTarea(id: number | undefined): void {
+    if (id === undefined) {
+      console.warn("ID no válido para eliminar la tarea");
+      return;
+    }
     this.tareaService.eliminarTarea(id).subscribe(() => {
       this.obtenerTareas();
     });
