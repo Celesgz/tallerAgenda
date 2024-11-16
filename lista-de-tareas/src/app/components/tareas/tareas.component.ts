@@ -11,14 +11,19 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
 })
+
 export class TareasComponent implements OnInit {
   tareas: Tarea[] = [];
+  tareasTrabajo: Tarea[] = [];
+  tareasEstudio: Tarea[] = [];
+  tareasDiario: Tarea[] = [];
   nuevaTarea: Tarea = { 
     titulo: '', 
     descripcion: '', 
     completada: false, 
     prioridad: '', 
-    _id: ''  
+    categoria: '',
+    _id: '' 
   }; 
   mostrarPopup: boolean = false;
 
@@ -40,7 +45,7 @@ export class TareasComponent implements OnInit {
   agregarTarea(): void {
     this.tareaService.crearTarea(this.nuevaTarea).subscribe(() => {
       this.obtenerTareas();
-      this.nuevaTarea = { titulo: '', descripcion: '', completada: false, prioridad: '', _id: '' }; // Resetear el campo _id
+      this.nuevaTarea = { titulo: '', descripcion: '', completada: false, prioridad: '',  categoria: '', _id: '' }; // Resetear el campo _id
       this.cerrarPopup();
     });
   }
@@ -72,10 +77,22 @@ export class TareasComponent implements OnInit {
   }
 
   marcarCompletada(tarea: Tarea): void {
-    if (tarea._id) {  
-      this.tareaService.marcarCompletada(tarea._id).subscribe(() => {
-        this.obtenerTareas(); 
+    if (tarea._id) { // Usamos _id en lugar de id
+      this.tareaService.marcarCompletada(tarea._id).subscribe({
+        next: (tareaActualizada) => {
+          // Aquí actualizamos la lista de tareas localmente
+          const tareaIndex = this.tareas.findIndex(t => t._id === tarea._id);
+          if (tareaIndex !== -1) {
+            this.tareas[tareaIndex].completada = true; // Marca la tarea como completada
+          }
+        },
+        error: (error) => {
+          console.error('Error al marcar la tarea como completada:', error);
+        }
       });
     }
   }
+
+  
+
 }

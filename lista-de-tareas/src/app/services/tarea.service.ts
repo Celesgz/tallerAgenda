@@ -9,6 +9,7 @@ interface Tarea {
   descripcion: string;
   completada: boolean;
   prioridad: string;  
+  categoria: string;  
 }
 
 @Injectable({
@@ -38,10 +39,10 @@ export class TareaService {
   }
 
   // Marcar tarea como completada
-  marcarCompletada(_id: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/completar/${_id}`, {}); 
+  marcarCompletada(id: string): Observable<Tarea> {
+    return this.http.put<Tarea>(`${this.apiUrl}/completar/${id}`, {}); // Pasa el _id a la API
   }
-  
+
   
 
   

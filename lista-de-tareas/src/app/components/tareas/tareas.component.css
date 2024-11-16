@@ -55,7 +55,7 @@ body {
     gap: 20px; 
     align-items: center;
     position: relative;
-    background-color: rgba(0, 0, 0, 0.185); /* Fondo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.185); 
     padding: 8px 12px; 
     border-radius: 8px; 
     border: 1px solid #858585;
@@ -146,52 +146,38 @@ body {
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espaciado entre los elementos */
-    margin: 20px 0; /* Margen superior e inferior */
+    gap: 10px; 
+    margin: 20px 0; 
     padding: 15px;
-    background-color: #f9f9f9; /* Fondo del formulario */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
     width: 100%;
-    max-width: 500px; /* Ancho máximo */
-    align-self: center; /* Centrar el formulario si el contenedor es un flexbox */
+    max-width: 500px; 
+    align-self: center; 
 }
 
-input, textarea {
+input, textarea , select{
     font-family: Arial, sans-serif;
     font-size: 14px;
     padding: 10px;
-    border: 1px solid #ccc; /* Borde gris */
+    border: 1px solid #ccc; 
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
-    resize: none; /* Evitar que el textarea sea redimensionable */
+    resize: none; 
 }
 
 input:focus, textarea:focus {
-    border-color: #8c52ff; /* Color del borde al enfocar */
-    outline: none; /* Sin borde adicional */
-    box-shadow: 0 0 5px rgba(140, 82, 255, 0.5); /* Sombra suave */
+    border-color: #8c52ff; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(140, 82, 255, 0.5); 
 }
 
-button[type="submit"] {
-    background-color: #8c52ff; 
-    color: white;
-    font-size: 14px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-    background-color: #6e4c94; /* Color más oscuro al pasar el cursor */
-}
 
 button[type="submit"]:active {
-    background-color: #5b3e7a; /* Color al hacer clic */
-    transform: scale(0.98); /* Animación sutil al presionar */
+    background-color: #5b3e7a; 
+    transform: scale(0.98); 
 }
 
 
@@ -206,17 +192,23 @@ button[type="submit"]:active {
 /* Columna */
 .column {
     width: 100%;
-    max-width: 600px;
+    max-width:600px;
     background-color: #f5f5f5;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: url('hojasCuadriculadas.jpg') no-repeat center center;
+    background-size: cover;
+    
 }
 
 .column h2 {
     font-size: 16px;
-    color: #363636;
+    color: #ffffff;
     margin-bottom: 15px;
+background-color: #6e4c94;
+padding: 15px ;
+border-radius: 8px  8px 0 0 ;
 }
 
 ul {
@@ -231,6 +223,7 @@ li {
 
 /* Tarjeta */
 .card {
+    width: 100%;
     background-color: white;
     border-radius: 8px;
     padding: 15px;
@@ -238,6 +231,7 @@ li {
     display: flex;
     flex-direction: column;
     gap: 10px;
+   
 }
 
 
@@ -319,23 +313,25 @@ button:nth-child(3) {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+ 
 }
 
 /* Contenedor principal del popup */
 .popup-content {
-    background-color: #ffffff; /* Fondo blanco */
+    background: url('fondoCuadriculas.jpg') no-repeat center center;
+    background-size: cover;
     padding: 20px 30px;
     width: 400px;
     max-width: 90%;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
     position: relative;
-    animation: slideDown 0.3s ease-out; /* Animación de entrada */
+    animation: slideDown 0.3s ease-out; 
 }
 
 /* Animación de deslizamiento hacia abajo */
@@ -370,6 +366,7 @@ button:nth-child(3) {
     font-size: 24px;
     margin-bottom: 15px;
     text-align: center;
+    margin-top: 22px;
 }
 
 .popup-content form {
@@ -385,7 +382,7 @@ button:nth-child(3) {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 14px;
     font-family: Arial, sans-serif;
     resize: none;
     outline: none;
@@ -401,12 +398,12 @@ button:nth-child(3) {
 /* Selector de categoría y prioridad */
 .popup-content label {
     font-size: 14px;
-    color: #555;
+    color: #454242;
 }
 
-.popup-content select {
+/* .popup-content select {
     background-color: #f9f9f9;
-}
+} */
 
 /* Botón de agregar tarea */
 .popup-content button[type="submit"] {
