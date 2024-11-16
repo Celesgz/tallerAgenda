@@ -39,13 +39,21 @@ export class TareasComponent implements OnInit {
   }
 
   obtenerTareas(): void {
-    this.tareaService.obtenerTareas().subscribe((tareas) => (this.tareas = tareas));
+    this.tareaService.obtenerTareas().subscribe((tareas) => {
+      console.log('Tareas obtenidas del servicio:', tareas);
+      this.tareas = tareas;
+  
+      // Filtrar por categorías
+      this.tareasTrabajo = tareas.filter(t => t.categoria === 'Trabajo');
+      this.tareasEstudio = tareas.filter(t => t.categoria === 'Estudio');
+      this.tareasDiario = tareas.filter(t => t.categoria === 'Diario');
+    });
   }
-
   agregarTarea(): void {
+    console.log('Nueva tarea antes de enviar:', this.nuevaTarea); // Verifica que prioridad y categoría estén llenas
     this.tareaService.crearTarea(this.nuevaTarea).subscribe(() => {
       this.obtenerTareas();
-      this.nuevaTarea = { titulo: '', descripcion: '', completada: false, prioridad: '',  categoria: '', _id: '' }; // Resetear el campo _id
+      this.nuevaTarea = { titulo: '', descripcion: '', completada: false, prioridad: '', categoria: '', _id: '' }; // Resetea los datos
       this.cerrarPopup();
     });
   }
