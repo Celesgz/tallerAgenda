@@ -1,0 +1,422 @@
+/* Estilo general */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #8c52ff, #a768c0, #cc6fbd, #ff914dcc);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Barra de navegación superior */
+.top-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #473699d7;
+    padding: 10px 20px;
+    color: white;
+    width: 100%;
+    border-bottom: 1px solid #858585;
+}
+
+.top-navbar .logo {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+}
+
+.top-navbar .logo img {
+    width: 20px;
+    height: 20px;
+}
+.top-navbar .date-time {
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    text-align: right;
+    display: flex;
+    gap: 20px; 
+    align-items: center;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.185); 
+    padding: 8px 12px; 
+    border-radius: 8px; 
+    border: 1px solid #858585;
+}
+
+.top-navbar .date-time h2 {
+    margin: 0;
+    font-size: 16px; 
+    line-height: 1.3;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-navbar .date-time p {
+    margin: 0;
+    font-size: 16px;
+    color: #dcdcdc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.top-navbar .date-time i {
+    font-size: 20px;
+    color: #f5f5f5; 
+    transition: transform 0.3s; 
+}
+
+.navbar  i:hover {
+    transform: scale(1.5); 
+}
+.navbar .icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #fff; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  cursor: pointer;
+}
+
+.icon i {
+    font-size: 18px; 
+    color: #6e4c94; 
+  }
+
+/* Barra de navegación secundaria */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6e4c94;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.navbar h1 {
+    color: white;
+    font-size: 20px;
+    margin: 0;
+}
+
+.navbar .menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar .icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.8;
+}
+/* form estilos */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    margin: 20px 0; 
+    padding: 15px;
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    width: 100%;
+    max-width: 500px; 
+    align-self: center; 
+}
+
+input, textarea , select{
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: none; 
+}
+
+input:focus, textarea:focus {
+    border-color: #8c52ff; 
+    outline: none;
+    box-shadow: 0 0 5px rgba(140, 82, 255, 0.5); 
+}
+
+
+button[type="submit"]:active {
+    background-color: #5b3e7a; 
+    transform: scale(0.98); 
+}
+
+
+/* Tablero */
+.board {
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    justify-content: center;
+}
+
+/* Columna */
+.column {
+    width: 100%;
+    max-width:600px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: url('hojasCuadriculadas.jpg') no-repeat center center;
+    background-size: cover;
+    
+}
+
+.column h2 {
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 15px;
+background-color: #6e4c94;
+padding: 15px ;
+border-radius: 8px  8px 0 0 ;
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 15px;
+}
+
+/* Tarjeta */
+.card {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   
+}
+
+
+
+.task-icon {
+    font-size: 18px;
+}
+
+
+
+.task-header {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.task-header h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card p {
+    margin: 5px 0 10px 0; 
+    font-size: 14px;
+    color: #555; 
+}
+
+.task-footer {
+    display: flex;
+    gap: 10px; 
+    margin-top: 10px; 
+}
+
+
+/* Botones */
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+button:active {
+    transform: scale(1);
+}
+
+button:nth-child(1) {
+    background-color: #28a745; 
+    color: white;
+}
+
+button:nth-child(2) {
+    background-color: #ffc107; 
+    color: black;
+}
+
+button:nth-child(3) {
+    background-color: #dc3545; 
+    color: white;
+}
+.delete button{
+    background-color: #dc3545; 
+    color: white;
+}
+
+/* Estilo del popup */
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+ 
+}
+
+/* Contenedor principal del popup */
+.popup-content {
+    background: url('fondoCuadriculas.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 20px 30px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+    position: relative;
+    animation: slideDown 0.3s ease-out; 
+}
+
+/* Animación de deslizamiento hacia abajo */
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Botón de cerrar en la esquina superior derecha */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+/* Estilo del formulario */
+.popup-content h3 {
+    color: #6e4c94;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    margin-top: 22px;
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Campos de texto y textarea */
+.popup-content input[type="text"],
+.popup-content textarea,
+.popup-content select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.popup-content input[type="text"]:focus,
+.popup-content textarea:focus,
+.popup-content select:focus {
+    border-color: #6e4c94;
+}
+
+/* Selector de categoría y prioridad */
+.popup-content label {
+    font-size: 14px;
+    color: #454242;
+}
+
+/* .popup-content select {
+    background-color: #f9f9f9;
+} */
+
+/* Botón de agregar tarea */
+.popup-content button[type="submit"] {
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #6e4c94;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-content button[type="submit"]:hover {
+    background-color: #563a79;
+}

@@ -104,18 +104,18 @@ app.use(cors({
 const PORT = process.env.PORT || 3000;
 
 // Conectar a MongoDB
-mongoose.connect('mongodb://localhost:27017/mi_lista_tareas', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect('mongodb://localhost:27017/mi_lista_tareas')
     .then(() => console.log('Conectado a MongoDB'))
     .catch((error) => console.error('Error al conectar a MongoDB:', error));
 
 // Definir el esquema y el modelo de tarea
 const tareaSchema = new Schema({
     titulo: { type: String, required: true },
-    descripcion: { type: String, required: true }
-});
+    descripcion: { type: String, required: true },
+    completada: { type: Boolean, default: false },  
+    prioridad: { type: String, required: true },
+    categoria: { type: String, required: true },
+  });
 
 // Agregar el plugin de autoincremento al esquema
 tareaSchema.plugin(AutoIncrement, { inc_field: 'id' });
@@ -134,14 +134,22 @@ app.get('/api/tareas', async (req, res) => {
 
 // 2. Agregar una nueva tarea a la base de datos
 app.post('/api/tareas', async (req, res) => {
-    const { titulo, descripcion } = req.body;
+    const { titulo, descripcion, completada, prioridad, categoria } = req.body; // Añadido `categoria`
 
-    if (!titulo || !descripcion) {
-        return res.status(400).json({ mensaje: "El título y la descripción son obligatorios." });
+    // Validamos que los campos requeridos estén presentes
+    if (!titulo || !descripcion || !prioridad || !categoria) {
+        return res.status(400).json({ mensaje: "Los datos son obligatorios." });
     }
 
     try {
-        const nuevaTarea = new Tarea({ titulo, descripcion });
+        const nuevaTarea = new Tarea({
+            titulo,
+            descripcion,
+            completada: completada !== undefined ? completada : false, 
+            prioridad,
+            categoria 
+        });
+        
         const tareaGuardada = await nuevaTarea.save();
         res.status(201).json(tareaGuardada);
     } catch (error) {
@@ -149,27 +157,29 @@ app.post('/api/tareas', async (req, res) => {
     }
 });
 
-// 3. Eliminar una tarea por ID desde la base de datos
+// 3. Eliminar una tarea por el campo `id` numérico desde la base de datos
+// Eliminar una tarea por _id
 app.delete('/api/tareas/:id', async (req, res) => {
     const { id } = req.params;
-
+  
     // Comprobar si el id es válido como ObjectId
     if (!ObjectId.isValid(id)) {
-        return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+      return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
     }
-
+  
     try {
-        const tareaEliminada = await Tarea.findByIdAndDelete(id);
-
-        if (!tareaEliminada) {
-            return res.status(404).json({ mensaje: "Tarea no encontrada." });
-        }
-
-        res.status(200).json({ mensaje: `Tarea con id ${id} eliminada correctamente.` });
+      // Eliminar la tarea usando _id
+      const tareaEliminada = await Tarea.findByIdAndDelete(id);
+  
+      if (!tareaEliminada) {
+        return res.status(404).json({ mensaje: "Tarea no encontrada." });
+      }
+  
+      res.status(200).json({ mensaje: `Tarea con _id ${id} eliminada correctamente.` });
     } catch (error) {
-        res.status(500).json({ mensaje: "Error al eliminar la tarea", error });
+      res.status(500).json({ mensaje: "Error al eliminar la tarea", error });
     }
-});
+  });
 
 // 4. Editar una tarea por ID en la base de datos
 app.put('/api/tareas/:id', async (req, res) => {
@@ -216,6 +226,61 @@ app.get('/api/tareas/:id', async (req, res) => {
         res.json(tarea);
     } catch (error) {
         res.status(500).json({ mensaje: "Error al obtener la tarea", error });
+    }
+});
+
+// 6- actualizar el estado de completada de una tarea
+app.put('/api/tareas/completar/:id', async (req, res) => {
+    const { id } = req.params; // Este es el _id de la tarea que se va a actualizar
+    
+    // Verificar si el id es válido como ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+    }
+  
+    try {
+      // Buscar la tarea por _id y actualizar el campo completada
+      const tarea = await Tarea.findByIdAndUpdate(
+        id, 
+        { completada: true },  // Cambiar la tarea a completada
+        { new: true }  // Devolver la tarea actualizada
+      );
+  
+      if (!tarea) {
+        return res.status(404).json({ mensaje: "Tarea no encontrada." });
+      }
+  
+      res.status(200).json(tarea); // Devuelve la tarea actualizada
+    } catch (error) {
+      res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
+    }
+  });
+  
+// 7. desmarcar la tarea como no completada
+app.put('/api/tareas/no-completada/:id', async (req, res) => {
+    const { id } = req.params;
+
+    // Comprobar si el id es válido como ObjectId
+    if (!ObjectId.isValid(id)) {
+        return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+    }
+
+    try {
+        // Buscar la tarea por id y actualizar el campo 'completada'
+        const tareaActualizada = await Tarea.findByIdAndUpdate(
+            id,
+            { completada: false },  // Marcamos la tarea como no completada
+            { new: true }  // Retornamos el documento actualizado
+        );
+
+        // Si no se encuentra la tarea
+        if (!tareaActualizada) {
+            return res.status(404).json({ mensaje: "Tarea no encontrada." });
+        }
+
+        res.status(200).json(tareaActualizada);
+    } catch (error) {
+        res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
     }
 });
 

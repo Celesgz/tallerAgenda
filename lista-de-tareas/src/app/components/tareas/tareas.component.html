@@ -1,25 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Mis Tareas</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra de navegación superior -->
+        <div class="top-navbar">
+            <div class="logo">
+                <img src="https://img.icons8.com/color/48/trello.png" alt="Trello">
+                Agendita
+            </div>
+            <div class="date-time">
+                <h2><i class="fas fa-calendar-day"></i>{{ currentDate }}</h2> 
+                <p><i class="fas fa-clock"></i>{{ currentTime }}</p>
+            </div>
+        </div>
 
+        <!-- Barra de navegación secundaria -->
+        <div class="navbar">
+            <h1>˚⋆｡°✩ Mis tareas ⁺˚⋆｡°✩</h1>
+            <div class="menu">
+                <div class="icons">
+                    <div class="icon" (click)="abrirPopup()"><i class="fas fa-plus"></i></div>
+                    <div class="icon"><i class="fas fa-user"></i></div>
+                    <div class="icon"><i class="fas fa-cog"></i></div>
+                </div>
+            </div>
+        </div>
 
-<div class="container">
-  <h1>Lista de Tareas</h1>
+        <!-- Popup para agregar tarea -->
+        <div class="popup" *ngIf="mostrarPopup">
+            <div class="popup-content">
+                <span class="close-btn" (click)="cerrarPopup()">&times;</span>
+                <h3>Agregar Tarea</h3>
+                <form (ngSubmit)="agregarTarea()">
+                    <label for="titulo">Título:</label>
+                    <input id="titulo" [(ngModel)]="nuevaTarea.titulo" name="titulo" placeholder="Título" required />
+                
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" [(ngModel)]="nuevaTarea.descripcion" name="descripcion" placeholder="Hacer las compras..." required></textarea>
+                
+                    <label for="categoria">Categoría:</label>
+                    <select id="categoria" [(ngModel)]="nuevaTarea.categoria" name="categoria" required>
+                        <option value="Trabajo">Trabajo</option>
+                        <option value="Estudio">Estudio</option>
+                        <option value="Diario">Diario</option>
+                    </select>
+                    
+                    <label for="prioridad">Prioridad:</label>
+                    <select id="prioridad" [(ngModel)]="nuevaTarea.prioridad" name="prioridad" required>
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="baja">Baja</option>
+                    </select>
+                
+                    <button type="submit">Agregar Tarea</button>
+                </form>
+            </div>
+        </div>
 
-  <!-- Formulario para agregar tarea -->
-  <form (ngSubmit)="agregarTarea()">
-    <input [(ngModel)]="nuevaTarea.titulo" name="titulo" placeholder="Título" required>
-    <textarea [(ngModel)]="nuevaTarea.descripcion" name="descripcion" placeholder="Descripción" required></textarea>
-    <button type="submit">Agregar Tarea</button>
-  </form>
+        <!-- Tablero -->
+        <div class="board">
+             <div class="column">
+                <h2>Lista de tareas</h2>
+                <ul>
+                    <li *ngFor="let tarea of tareas" class="task-card">
+                        <div class="card">
+                            <div class="task-header">
+                                <span class="task-icon">📌</span>
+                                <h4>{{ tarea.titulo }}</h4>
+                            </div>
+                            <p>{{ tarea.descripcion }}</p>
+                            <div class="task-footer">
+                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
+                                    Marcar Completada
+                                </button>
+                                <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+                                <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div> 
 
-  <!-- Lista de tareas -->
-  <div *ngIf="tareas.length > 0 ; else SinTareas">
-    <ul>
-      <li *ngFor="let tarea of tareas">
-        <h2>{{ tarea.titulo }}</h2>
-        <p>{{ tarea.descripcion }}</p>
-        <button (click)="editarTarea(tarea)">Editar</button>
-        <button *ngIf="tarea.id !== undefined" (click)="eliminarTarea(tarea.id)">Eliminar</button>
-      </li>
-    </ul>
-  </div>
-  <ng-template #SinTareas>No hay tareas</ng-template>
-</div>
+            <!-- <div class="column">
+                <h2>Lista de tareas trabajo</h2>
+                <ul>
+                    <li *ngFor="let tarea of tareasTrabajo" class="task-card">
+                        <div class="card">
+                            <div class="task-header">
+                                <span class="task-icon">📌</span>
+                                <h4>{{ tarea.titulo }}</h4>
+                            </div>
+                            <p>{{ tarea.descripcion }}</p>
+                            <div class="task-footer">
+                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
+                                    Marcar Completada
+                                </button>
+                                <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+                                <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="column">
+                <h2>Lista de tareas estudio</h2>
+                <ul>
+                    <li *ngFor="let tarea of tareasEstudio" class="task-card">
+                        <div class="card">
+                            <div class="task-header">
+                                <span class="task-icon">📌</span>
+                                <h4>{{ tarea.titulo }}</h4>
+                            </div>
+                            <p>{{ tarea.descripcion }}</p>
+                            <div class="task-footer">
+                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
+                                    Marcar Completada
+                                </button>
+                                <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+                                <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="column">
+                <h2>Lista de tareas diarias</h2>
+                <ul>
+                    <li *ngFor="let tarea of tareasDiario" class="task-card">                        <div class="card">
+                            <div class="task-header">
+                                <span class="task-icon">📌</span>
+                                <h4>{{ tarea.titulo }}</h4>
+                            </div>
+                            <p>{{ tarea.descripcion }}</p>
+                            <div class="task-footer">
+                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
+                                    Marcar Completada
+                                </button>
+                                <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+                                <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div> -->
+            <div class="column">
+                <h2>Completadas</h2>
+                <ul>
+                    <ng-container *ngFor="let tarea of tareas">
+                        <li *ngIf="tarea.completada" class="task-card">
+                            <div class="card">
+                                <div class="task-header">
+                                    <span class="task-icon">✅</span>
+                                    <h4>{{ tarea.titulo }}</h4>
+                                </div>
+                                <p>{{ tarea.descripcion }}</p> 
+                                <div class="task-footer">
+                                    <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

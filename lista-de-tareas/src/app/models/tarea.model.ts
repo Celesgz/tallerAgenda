@@ -1,5 +1,10 @@
 export interface Tarea {
-    id?: number;
-    titulo: string;
-    descripcion: string;
-  }
+  id?: number;
+  _id: string;
+  titulo: string;
+  descripcion: string;
+  completada: boolean;
+  prioridad: string; 
+  categoria: string;  
+ 
+}
