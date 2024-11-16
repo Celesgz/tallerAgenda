@@ -1,24 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { TareaService } from '../../services/tarea.service';
+import { TareaService } from '../../services/tarea.service'; // Asegúrate de que el servicio esté importado
 import { Tarea } from '../../models/tarea.model';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-tareas',
   templateUrl: './tareas.component.html',
   styleUrls: ['./tareas.component.css'],
-  standalone: true,  // Asegúrate de marcarlo como standalone
-  imports: [FormsModule, CommonModule]  // Agregar FormsModule en la propiedad 'imports'
+  standalone: true,
+  imports: [FormsModule, CommonModule],
 })
 export class TareasComponent implements OnInit {
   tareas: Tarea[] = [];
-  nuevaTarea: Tarea = { titulo: '', descripcion: '', completada: false };
-  tareaAEditar: Tarea | null = null;
+  nuevaTarea: Tarea = { 
+    titulo: '', 
+    descripcion: '', 
+    completada: false, 
+    prioridad: '', 
+    _id: ''  
+  }; 
+  mostrarPopup: boolean = false;
 
-  constructor(private tareaService: TareaService) { }
+  // Declaración de las propiedades de fecha y hora
+  currentDate: string = '';  
+  currentTime: string = '';  
+
+  constructor(private tareaService: TareaService) {}
 
   ngOnInit(): void {
     this.obtenerTareas();
+    this.actualizarFechaYHora(); 
   }
 
   obtenerTareas(): void {
@@ -26,49 +38,44 @@ export class TareasComponent implements OnInit {
   }
 
   agregarTarea(): void {
-    // if (this.tareaAEditar && this.tareaAEditar.id) {
-    //   this.tareaService.actualizarTarea(this.tareaAEditar.id, this.tareaAEditar).subscribe(() => {
-    //     this.obtenerTareas();
-    //     this.tareaAEditar = null;
-    //   });
-    // } else {
     this.tareaService.crearTarea(this.nuevaTarea).subscribe(() => {
       this.obtenerTareas();
-      this.nuevaTarea = { titulo: '', descripcion: '' ,completada: false };
+      this.nuevaTarea = { titulo: '', descripcion: '', completada: false, prioridad: '', _id: '' }; // Resetear el campo _id
+      this.cerrarPopup();
     });
-    // }
   }
 
-  editarTarea(tarea: Tarea): void {
-    if (this.tareaAEditar && this.tareaAEditar.id) {
-      this.tareaService.actualizarTarea(this.tareaAEditar.id, this.tareaAEditar).subscribe(() => {
-        this.obtenerTareas();
-        this.tareaAEditar = null;
-      });
-    }
+  abrirPopup(): void {
+    this.mostrarPopup = true;
   }
 
-  cancelarEdicion(): void {
-    this.tareaAEditar = null;
+  cerrarPopup(): void {
+    this.mostrarPopup = false;
   }
 
-  eliminarTarea(id: number): void {
-    if (!id === undefined) {
-      this.tareaService.eliminarTarea(id).subscribe(() => {
-        this.obtenerTareas();
-      });
-    }
+  actualizarFechaYHora(): void {
+    const ahora = new Date();
+    this.currentDate = ahora.toLocaleDateString('es-ES'); 
+    this.currentTime = ahora.toLocaleTimeString('es-ES'); 
   }
 
-  marcarComoCompletada(tarea: Tarea): void {
-    if (tarea.id !== undefined) {  // Verifica si id está definido
-      tarea.completada = true;  // Marca la tarea como completada
-      this.tareaService.actualizarTarea(tarea.id, tarea).subscribe(() => {
-        this.obtenerTareas();  // Actualiza la lista de tareas
+  eliminarTarea(_id: string): void {  
+    if (_id) { 
+      this.tareaService.eliminarTarea(_id).subscribe(() => {
+        this.obtenerTareas(); 
+      }, error => {
+        console.error('Error al eliminar la tarea:', error);
       });
     } else {
-      console.error('ID de tarea no válido');
+      console.error('El _id de la tarea es nulo o indefinido');
     }
   }
-  
+
+  marcarCompletada(tarea: Tarea): void {
+    if (tarea._id) {  
+      this.tareaService.marcarCompletada(tarea._id).subscribe(() => {
+        this.obtenerTareas(); 
+      });
+    }
+  }
 }

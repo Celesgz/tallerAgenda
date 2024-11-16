@@ -16,23 +16,51 @@
                 <img src="https://img.icons8.com/color/48/trello.png" alt="Trello">
                 Agendita
             </div>
-            <div class="icons">
-                <div class="icon"></div>
-                <div class="icon"></div>
-                <div class="icon"></div>
-            </div>
+            <div class="date-time">
+              <h2><i class="fas fa-calendar-day"></i>{{ currentDate }}</h2> 
+              <p><i class="fas fa-clock"></i>{{ currentTime }}</p>
+          </div>
         </div>
 
         <!-- Barra de navegación secundaria -->
         <div class="navbar">
             <h1>˚⋆｡°✩ Mis tareas ⁺˚⋆｡°✩</h1>
             <div class="menu">
-                <div class="icon"></div>
-                <div class="icon"></div>
-                <div class="icon"></div>
+              <div class="icons">
+                <div class="icon" (click)="abrirPopup()"><i class="fas fa-plus"></i></div>
+                <div class="icon"><i class="fas fa-user"></i></div>
+                <div class="icon"><i class="fas fa-cog"></i></div>
+              </div>
             </div>
         </div>
 
+    
+
+    <!-- Popup para agregar tarea -->
+    <div class="popup" *ngIf="mostrarPopup">
+      <div class="popup-content">
+        <span class="close-btn" (click)="cerrarPopup()">&times;</span>
+        <h3>Agregar Tarea</h3>
+        <form (ngSubmit)="agregarTarea()">
+            <input [(ngModel)]="nuevaTarea.titulo" name="titulo" placeholder="Título" required />
+            <textarea [(ngModel)]="nuevaTarea.descripcion" name="descripcion" placeholder="Descripción" required></textarea>
+            
+         
+            
+            <!-- Selector de prioridad -->
+            <label for="prioridad">Prioridad:</label>
+            <select [(ngModel)]="nuevaTarea.prioridad" name="prioridad" required>
+              <option value="alta">Alta</option>
+              <option value="media">Media</option>
+              <option value="baja">Baja</option>
+            </select>
+
+            <button type="submit">Agregar Tarea</button>
+        </form>
+      </div>
+    </div>
+
+        
         <!-- Tablero -->
         <div class="board">
           <div class="column">
@@ -44,11 +72,11 @@
                             <span class="task-icon">📌</span>
                             <h4>{{ tarea.titulo }}</h4>
                         </div>
-                        <p>{{ tarea.descripcion }}</p> <!-- Descripción debajo del título -->
+                        <p>{{ tarea.descripcion }}</p>
                         <div class="task-footer">
-                            <button class="complete">Marcar como Completada</button>
-                            <button class="edit"><i class="fas fa-pencil-alt"></i></button>
-                            <button *ngIf="tarea.id !== undefined" class="delete"><i class="fas fa-trash"></i></button>
+                          <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">Marcar Completada</button>
+                          <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+                          <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
                         </div>
                     </div>
                 </li>
@@ -65,9 +93,9 @@
                                 <span class="task-icon">✅</span>
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
-                            <p>{{ tarea.descripcion }}</p> <!-- Descripción debajo del título -->
+                            <p>{{ tarea.descripcion }}</p> 
                             <div class="task-footer">
-                                <button *ngIf="tarea.id !== undefined" class="delete"><i class="fas fa-trash"></i></button>
+                                <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
                             </div>
                         </div>
                     </li>
