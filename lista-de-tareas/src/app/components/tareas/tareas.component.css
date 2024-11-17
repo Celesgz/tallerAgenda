@@ -209,8 +209,18 @@ button[type="submit"]:active {
 background-color: #6e4c94;
 padding: 15px ;
 border-radius: 8px  8px 0 0 ;
+text-align: center;
+text-transform: uppercase;
 }
-
+/*Columna de completados*/
+.completed{
+    min-width: 390px;
+    border-left: grey solid 2px;
+}
+.separator{
+    border-left: rgb(197, 194, 194) solid 2px;
+    min-height: inherit;
+}
 ul {
     list-style-type: none; 
     padding: 0;
@@ -424,4 +434,15 @@ button:nth-child(3) {
 .high-priority {
     font-weight: bold;
     color: red; /* Opcional, para destacar más */
+    text-transform: uppercase;
+}
+.medium-priority {
+    font-weight: bold;
+    color: orange; /* Opcional, para destacar más */
+    text-transform: uppercase;
+}
+.low-priority {
+    font-weight: bold;
+    color: grey; /* Opcional, para destacar más */
+    text-transform: uppercase;
 }

@@ -101,7 +101,9 @@
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
-                            <p>Prioridad: {{ tarea.prioridad }}</p>
+                            <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
+                                'medium-priority': tarea.prioridad === 'media',
+                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad }}</span></p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -126,7 +128,9 @@
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
-                            <p [ngClass]="{'high-priority': tarea.prioridad === 'alta'}">Prioridad: {{ tarea.prioridad }}</p>
+                            <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
+                                'medium-priority': tarea.prioridad === 'media',
+                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad }}</span></p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -151,12 +155,14 @@
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
-                            <p>Prioridad: {{ tarea.prioridad }}</p>
+                            <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
+                                'medium-priority': tarea.prioridad === 'media',
+                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad }}</span></p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
                                 </button>
-                                <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+                                <button (click)="editarTarea(tarea)" class="edit"><i class="fas fa-pencil-alt"></i></button>
                                 <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
                             </div>
                         </div>
@@ -164,7 +170,8 @@
                 </ng-container>
                 </ul>
             </div> 
-            <div class="column">
+            <div class="separator"></div>
+            <div class="column completed">
                 <h2>Completadas</h2>
                 <ul>
                     <ng-container *ngFor="let tarea of tareas">
@@ -172,10 +179,12 @@
                             <div class="card">
                                 <div class="task-header">
                                     <span class="task-icon">✅</span>
-                                    <h4>{{ tarea.titulo }}</h4>
+                                    <h4>{{ tarea.titulo.toUpperCase() }}</h4>
                                 </div>
                                 <p>{{ tarea.descripcion }}</p> 
-                                <p>Prioridad: {{ tarea.prioridad }}</p>
+                                <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
+                                    'medium-priority': tarea.prioridad === 'media',
+                                    'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad }}</span></p>
                                 <div class="task-footer">
                                     <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
                                 </div>
