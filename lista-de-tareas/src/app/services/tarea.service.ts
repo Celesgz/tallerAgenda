@@ -23,7 +23,7 @@ export class TareaService {
   obtenerTareas(): Observable<Tarea[]> {
     return this.http.get<Tarea[]>(this.apiUrl);
   }
-
+  
   crearTarea(tarea: Tarea): Observable<Tarea> {
     return this.http.post<Tarea>(this.apiUrl, tarea);
   }

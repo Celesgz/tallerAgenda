@@ -65,7 +65,7 @@
 
         <!-- Tablero -->
         <div class="board">
-             <div class="column">
+             <!-- <div class="column">
                 <h2>Lista de tareas</h2>
                 <ul>
                     <li *ngFor="let tarea of tareas" class="task-card">
@@ -75,6 +75,9 @@
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
+                            <p><strong>Categoría:</strong> {{ tarea.categoria || 'Sin categoría' }}</p>
+                            <p><strong>Prioridad:</strong> {{ tarea.prioridad || 'Sin prioridad' }}</p>
+
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -85,9 +88,9 @@
                         </div>
                     </li>
                 </ul>
-            </div> 
+            </div>  -->
 
-             <div class="column">
+            <div class="column">
                 <h2>Lista de tareas trabajo</h2>
                 <ul>
                     <ng-container *ngFor="let tarea of tareas">
@@ -157,7 +160,7 @@
                     </li>
                 </ng-container>
                 </ul>
-            </div> -->
+            </div> 
             <div class="column">
                 <h2>Completadas</h2>
                 <ul>
