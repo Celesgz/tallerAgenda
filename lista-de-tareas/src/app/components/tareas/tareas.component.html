@@ -101,6 +101,7 @@
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
+                            <p>Prioridad: {{ tarea.prioridad }}</p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -125,6 +126,7 @@
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
+                            <p [ngClass]="{'high-priority': tarea.prioridad === 'alta'}">Prioridad: {{ tarea.prioridad }}</p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -149,6 +151,7 @@
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
+                            <p>Prioridad: {{ tarea.prioridad }}</p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -172,6 +175,7 @@
                                     <h4>{{ tarea.titulo }}</h4>
                                 </div>
                                 <p>{{ tarea.descripcion }}</p> 
+                                <p>Prioridad: {{ tarea.prioridad }}</p>
                                 <div class="task-footer">
                                     <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
                                 </div>

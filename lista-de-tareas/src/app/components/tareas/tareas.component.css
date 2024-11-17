@@ -185,7 +185,7 @@ button[type="submit"]:active {
 .board {
     display: flex;
     gap: 20px;
-    width: 80%;
+    width: 90%;
     justify-content: center;
 }
 
@@ -419,4 +419,9 @@ button:nth-child(3) {
 
 .popup-content button[type="submit"]:hover {
     background-color: #563a79;
+}
+
+.high-priority {
+    font-weight: bold;
+    color: red; /* Opcional, para destacar más */
 }
