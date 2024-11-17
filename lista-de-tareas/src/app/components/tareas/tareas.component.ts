@@ -117,6 +117,31 @@ export class TareasComponent implements OnInit {
     }
   }
 
-  
+  tareaSeleccionada: Tarea | null = null;
+
+abrirEditor(tarea: Tarea): void {
+    this.tareaSeleccionada = { ...tarea }; // Clona los datos de la tarea
+}
+
+guardarEdicion(): void {
+    if (this.tareaSeleccionada && this.tareaSeleccionada._id) {
+        this.tareaService.editarTarea(this.tareaSeleccionada).subscribe({
+            next: (tareaActualizada) => {
+                const index = this.tareas.findIndex(t => t._id === tareaActualizada._id);
+                if (index !== -1) {
+                    this.tareas[index] = tareaActualizada;
+                }
+                this.tareaSeleccionada = null; // Cierra el editor
+            },
+            error: (error) => {
+                console.error('Error al editar la tarea:', error);
+            }
+        });
+    }
+}
+
+cerrarEditor(): void {
+    this.tareaSeleccionada = null; // Cierra el editor sin guardar cambios
+}
 
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Press+Start+2P&family=Rubik+Mono+One&display=swap');
+
 /* Estilo general */
 * {
     padding: 0;
@@ -32,6 +34,8 @@ body {
     color: white;
     width: 100%;
     border-bottom: 1px solid #858585;
+    font-family: "Rubik Mono One";
+    letter-spacing: 2px;
 }
 
 .top-navbar .logo {
@@ -200,27 +204,33 @@ button[type="submit"]:active {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background: url('hojasCuadriculadas.jpg') no-repeat center center;
     background-size: cover;
+
     
 }
 
 .column h2 {
-    font-size: 16px;
-    color: #ffffff;
-    margin-bottom: 15px;
+font-size: 16px;
+color: #ffffff;
+margin-bottom: 15px;
 background-color: #6e4c94;
 padding: 15px ;
 border-radius: 8px  8px 0 0 ;
 text-align: center;
 text-transform: uppercase;
+box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.4);
+
 }
 .column:nth-child(1) h2 {
     background-color:#af67c6;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 .column:nth-child(2) h2 {
     background-color: #d287ab; 
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 .column:nth-child(3) h2 {
     background-color: #f39a7b; 
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 /*Columna de completados*/
@@ -249,10 +259,11 @@ li {
     background-color: white;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) ;
     display: flex;
     flex-direction: column;
     gap: 10px;
+
    
 }
 
@@ -294,6 +305,7 @@ button {
     cursor: pointer;
     font-size: 14px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+
 }
 
 button:hover {
@@ -313,16 +325,17 @@ button:nth-child(1) {
 button:nth-child(2) {
     background-color: #ffc107; 
     color: black;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.4);
+
 }
 
 button:nth-child(3) {
     background-color: #dc3545; 
     color: white;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.4);
+
 }
-.delete button{
-    background-color: #dc3545; 
-    color: white;
-}
+
 
 /* Estilo del popup */
 

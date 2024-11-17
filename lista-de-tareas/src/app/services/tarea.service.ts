@@ -46,6 +46,10 @@ export class TareaService {
   marcarPendiente(id: string): Observable<Tarea> {
     return this.http.put<Tarea>(`${this.apiUrl}/pendiente/${id}`, {}); // Pasa el _id a la API
   }
+  editarTarea(tarea: Tarea): Observable<Tarea> {
+    return this.http.put<Tarea>(`${this.apiUrl}/${tarea._id}`, tarea);
+}
+
   
 
   

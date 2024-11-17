@@ -98,30 +98,49 @@ app.delete('/api/tareas/:id', async (req, res) => {
   });
 
 // 4. Editar una tarea por ID en la base de datos
+// app.put('/api/tareas/:id', async (req, res) => {
+//     const { id } = req.params;
+//     const { titulo, descripcion } = req.body;
+
+//     // Comprobar si el id es válido como ObjectId
+//     if (!ObjectId.isValid(id)) {
+//         return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+//     }
+
+//     try {
+//         // Usamos findByIdAndUpdate para buscar y actualizar la tarea por _id
+//         const tareaActualizada = await Tarea.findByIdAndUpdate(
+//             id,  // Aquí usamos el id directamente
+//             { titulo, descripcion },  // Campos a actualizar
+//             { new: true, runValidators: true }  // Retornar el documento actualizado y ejecutar validaciones
+//         );
+
+//         if (!tareaActualizada) {
+//             return res.status(404).json({ mensaje: "Tarea no encontrada." });
+//         }
+
+//         res.status(200).json(tareaActualizada);
+//     } catch (error) {
+//         res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
+//     }
+// });
+
 app.put('/api/tareas/:id', async (req, res) => {
     const { id } = req.params;
-    const { titulo, descripcion } = req.body;
-
-    // Comprobar si el id es válido como ObjectId
-    if (!ObjectId.isValid(id)) {
-        return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+    const datosActualizados = req.body;
+    
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ mensaje: "ID inválido" });
     }
 
     try {
-        // Usamos findByIdAndUpdate para buscar y actualizar la tarea por _id
-        const tareaActualizada = await Tarea.findByIdAndUpdate(
-            id,  // Aquí usamos el id directamente
-            { titulo, descripcion },  // Campos a actualizar
-            { new: true, runValidators: true }  // Retornar el documento actualizado y ejecutar validaciones
-        );
-
+        const tareaActualizada = await Tarea.findByIdAndUpdate(id, datosActualizados, { new: true });
         if (!tareaActualizada) {
-            return res.status(404).json({ mensaje: "Tarea no encontrada." });
+            return res.status(404).json({ mensaje: "Tarea no encontrada" });
         }
-
         res.status(200).json(tareaActualizada);
     } catch (error) {
-        res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
+        res.status(500).json({ mensaje: "Error al editar la tarea", error });
     }
 });
 
