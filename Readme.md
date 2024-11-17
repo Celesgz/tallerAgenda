@@ -38,12 +38,16 @@ Este proyecto es una aplicación de gestión de tareas desarrollada con Angular,
 
 ### Home
 ![Vista del home de la aplicación](./lista-de-tareas/public/01-interfaz.png)
+- Al hacer click en el simbolo "+" se despliega el popup para agregar una nueva tarea.
 
 ### Agregar Tarea
 ![Vista del popup de agregar tarea](./lista-de-tareas/public/02-interfaz.png)
+- Podemos completar el popup indicando un titulo, descripción, categoría(Estudio, Diario o Trabajo) y una prioridad(Alta, Media o Baja)
 
 ### Tarea guardada en su categoría
 ![Vista de la tarea guardada](./lista-de-tareas/public/03-interfaz.png)
+- Una vez guardada según el tipo de categoría la tarea se va a mostrar en una columna diferente. Podemos seleccionar la tarea como completada, editarla o eliminarla.
 
 ### Tarea completada
 ![Vista de la tarea completada](./lista-de-tareas/public/04-interfaz.png)
+- Una vez marcada como completada pasa a la columna de completadas donde puede ser eliminada.
