@@ -43,8 +43,8 @@ body {
 }
 
 .top-navbar .logo img {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 }
 .top-navbar .date-time {
     font-size: 16px;
@@ -193,6 +193,7 @@ button[type="submit"]:active {
 .column {
     width: 100%;
     max-width:600px;
+    min-width: 300px;
     background-color: #f5f5f5;
     border-radius: 8px;
     padding: 20px;
@@ -221,10 +222,12 @@ text-transform: uppercase;
 .column:nth-child(3) h2 {
     background-color: rgb(224, 179, 98); 
 }
+
 /*Columna de completados*/
 .completed{
-    min-width: 390px;
+    min-width: 340px;
     border-left: grey solid 2px;
+    min-height: 75vh;
 }
 .separator{
     border-left: rgb(197, 194, 194) solid 2px;
@@ -246,20 +249,16 @@ li {
     background-color: white;
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     gap: 10px;
    
 }
 
-
-
 .task-icon {
     font-size: 18px;
 }
-
-
 
 .task-header {
     display: flex;
@@ -441,17 +440,17 @@ button:nth-child(3) {
 }
 
 .high-priority {
-    font-weight: bold;
-    color: red; /* Opcional, para destacar más */
-    text-transform: uppercase;
+    color: red;
 }
 .medium-priority {
-    font-weight: bold;
-    color: orange; /* Opcional, para destacar más */
-    text-transform: uppercase;
+    color: orange; 
 }
 .low-priority {
-    font-weight: bold;
-    color: grey; /* Opcional, para destacar más */
+    color: grey;
+}
+
+.high-priority , .medium-priority, .low-priority{
+    padding-left: 5px;
     text-transform: uppercase;
+    font-weight: bold;
 }

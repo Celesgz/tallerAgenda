@@ -65,45 +65,21 @@
 
         <!-- Tablero -->
         <div class="board">
-             <!-- <div class="column">
-                <h2>Lista de tareas</h2>
-                <ul>
-                    <li *ngFor="let tarea of tareas" class="task-card">
-                        <div class="card">
-                            <div class="task-header">
-                                <span class="task-icon">📌</span>
-                                <h4>{{ tarea.titulo }}</h4>
-                            </div>
-                            <p>{{ tarea.descripcion }}</p>
-                            <p><strong>Categoría:</strong> {{ tarea.categoria || 'Sin categoría' }}</p>
-                            <p><strong>Prioridad:</strong> {{ tarea.prioridad || 'Sin prioridad' }}</p>
-
-                            <div class="task-footer">
-                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
-                                    Marcar Completada
-                                </button>
-                                <button class="edit"><i class="fas fa-pencil-alt"></i></button>
-                                <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>  -->
 
             <div class="column">
-                <h2>Lista de tareas trabajo</h2>
+                <h2>Tareas trabajo</h2>
                 <ul>
                     <ng-container *ngFor="let tarea of tareas">
-                    <li *ngIf="tarea.categoria == 'Trabajo'" class="task-card">
+                    <li *ngIf="tarea.categoria == 'Trabajo' && !tarea.completada" class="task-card">
                         <div class="card">
                             <div class="task-header">
                                 <span class="task-icon">📌</span>
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
-                            <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
+                            <p><strong>Prioridad:</strong><span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
                                 'medium-priority': tarea.prioridad === 'media',
-                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad }}</span></p>
+                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad' }}</span></p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -118,19 +94,19 @@
             </div>
             
             <div class="column">
-                <h2>Lista de tareas estudio</h2>
+                <h2>Tareas estudio</h2>
                 <ul>
                     <ng-container *ngFor="let tarea of tareas">
-                    <li *ngIf="tarea.categoria == 'Estudio'" class="task-card">
+                    <li *ngIf="tarea.categoria == 'Estudio' && !tarea.completada" class="task-card">
                         <div class="card">
                             <div class="task-header">
                                 <span class="task-icon">📌</span>
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
-                            <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
+                            <p><strong>Prioridad:</strong><span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
                                 'medium-priority': tarea.prioridad === 'media',
-                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad }}</span></p>
+                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad' }}</span></p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -145,19 +121,19 @@
             </div>
             
             <div class="column">
-                <h2>Lista de tareas diarias</h2>
+                <h2>Tareas diarias</h2>
                 <ul>
                 <ng-container *ngFor="let tarea of tareas">    
-                    <li *ngIf="tarea.categoria == 'Diario'" class="task-card">                        
+                    <li *ngIf="tarea.categoria == 'Diario' && !tarea.completada" class="task-card">                        
                         <div class="card">
                             <div class="task-header">
                                 <span class="task-icon">📌</span>
                                 <h4>{{ tarea.titulo }}</h4>
                             </div>
                             <p>{{ tarea.descripcion }}</p>
-                            <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
+                            <p><strong>Prioridad:</strong> <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
                                 'medium-priority': tarea.prioridad === 'media',
-                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad }}</span></p>
+                                'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad'}}</span></p>
                             <div class="task-footer">
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
@@ -184,7 +160,7 @@
                                 <p>{{ tarea.descripcion }}</p> 
                                 <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
                                     'medium-priority': tarea.prioridad === 'media',
-                                    'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad }}</span></p>
+                                    'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad' }}</span></p>
                                 <div class="task-footer">
                                     <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
                                 </div>
