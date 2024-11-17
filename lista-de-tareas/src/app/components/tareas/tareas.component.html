@@ -81,8 +81,8 @@
                                 'medium-priority': tarea.prioridad === 'media',
                                 'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad' }}</span></p>
                             <div class="task-footer">
-                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
-                                    Marcar Completada
+                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada" class="check-button">
+                                    <i class="far fa-check-circle"></i> 
                                 </button>
                                 <button class="edit"><i class="fas fa-pencil-alt"></i></button>
                                 <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
@@ -108,8 +108,8 @@
                                 'medium-priority': tarea.prioridad === 'media',
                                 'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad' }}</span></p>
                             <div class="task-footer">
-                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
-                                    Marcar Completada
+                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada" class="check-button">
+                                    <i class="far fa-check-circle"></i> 
                                 </button>
                                 <button class="edit"><i class="fas fa-pencil-alt"></i></button>
                                 <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
@@ -135,8 +135,8 @@
                                 'medium-priority': tarea.prioridad === 'media',
                                 'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad'}}</span></p>
                             <div class="task-footer">
-                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
-                                    Marcar Completada
+                                <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada" class="check-button">
+                                    <i class="far fa-check-circle"></i> 
                                 </button>
                                 
                                 <button  class="edit"><i class="fas fa-pencil-alt"></i></button>
@@ -163,8 +163,8 @@
                                     'medium-priority': tarea.prioridad === 'media',
                                     'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad' }}</span></p>
                                     <div class="task-footer">
-                                        <button (click)="marcarPendiente(tarea)" *ngIf="tarea.completada">
-                                            Marcar como Pendiente
+                                        <button (click)="marcarPendiente(tarea)" *ngIf="tarea.completada" class="check-button">
+                                            <i class="fas fa-check-circle" style="color: green;"></i>
                                         </button>                                        
                                         <button class="edit"><i class="fas fa-pencil-alt"></i></button>
                                         <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
