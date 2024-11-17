@@ -43,6 +43,9 @@ export class TareaService {
     return this.http.put<Tarea>(`${this.apiUrl}/completar/${id}`, {}); // Pasa el _id a la API
   }
 
+  marcarPendiente(id: string): Observable<Tarea> {
+    return this.http.put<Tarea>(`${this.apiUrl}/pendiente/${id}`, {}); // Pasa el _id a la API
+  }
   
 
   

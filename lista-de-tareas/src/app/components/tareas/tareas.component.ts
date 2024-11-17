@@ -101,6 +101,22 @@ export class TareasComponent implements OnInit {
     }
   }
 
+  marcarPendiente(tarea: Tarea): void {
+    if (tarea._id) {
+      this.tareaService.marcarPendiente(tarea._id).subscribe({
+        next: (tareaActualizada) => {
+          const tareaIndex = this.tareas.findIndex(t => t._id === tarea._id);
+          if (tareaIndex !== -1) {
+            this.tareas[tareaIndex].completada = false; // Marca la tarea como pendiente
+          }
+        },
+        error: (error) => {
+          console.error('Error al marcar la tarea como pendiente:', error);
+        }
+      });
+    }
+  }
+
   
 
 }

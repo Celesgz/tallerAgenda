@@ -138,6 +138,7 @@
                                 <button (click)="marcarCompletada(tarea)" [disabled]="tarea.completada">
                                     Marcar Completada
                                 </button>
+                                
                                 <button  class="edit"><i class="fas fa-pencil-alt"></i></button>
                                 <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
                             </div>
@@ -161,9 +162,13 @@
                                 <p >Prioridad: <span [ngClass]="{'high-priority': tarea.prioridad === 'alta',
                                     'medium-priority': tarea.prioridad === 'media',
                                     'low-priority': tarea.prioridad === 'baja'}">{{ tarea.prioridad || 'Sin prioridad' }}</span></p>
-                                <div class="task-footer">
-                                    <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
-                                </div>
+                                    <div class="task-footer">
+                                        <button (click)="marcarPendiente(tarea)" *ngIf="tarea.completada">
+                                            Marcar como Pendiente
+                                        </button>                                        
+                                        <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+                                        <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
+                                    </div>
                             </div>
                         </li>
                     </ng-container>

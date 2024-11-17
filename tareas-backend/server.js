@@ -148,12 +148,10 @@ app.get('/api/tareas/:id', async (req, res) => {
 // 6- actualizar el estado de completada de una tarea
 app.put('/api/tareas/completar/:id', async (req, res) => {
     const { id } = req.params; // Este es el _id de la tarea que se va a actualizar
-    
     // Verificar si el id es válido como ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
     }
-  
     try {
       // Buscar la tarea por _id y actualizar el campo completada
       const tarea = await Tarea.findByIdAndUpdate(
@@ -161,11 +159,9 @@ app.put('/api/tareas/completar/:id', async (req, res) => {
         { completada: true },  // Cambiar la tarea a completada
         { new: true }  // Devolver la tarea actualizada
       );
-  
       if (!tarea) {
         return res.status(404).json({ mensaje: "Tarea no encontrada." });
       }
-  
       res.status(200).json(tarea); // Devuelve la tarea actualizada
     } catch (error) {
       res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
@@ -173,32 +169,25 @@ app.put('/api/tareas/completar/:id', async (req, res) => {
   });
   
 // 7. desmarcar la tarea como no completada
-app.put('/api/tareas/no-completada/:id', async (req, res) => {
+app.put('/api/tareas/pendiente/:id', async (req, res) => {
     const { id } = req.params;
-
-    // Comprobar si el id es válido como ObjectId
-    if (!ObjectId.isValid(id)) {
-        return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ mensaje: "El ID proporcionado no es válido." });
     }
-
     try {
-        // Buscar la tarea por id y actualizar el campo 'completada'
-        const tareaActualizada = await Tarea.findByIdAndUpdate(
-            id,
-            { completada: false },  // Marcamos la tarea como no completada
-            { new: true }  // Retornamos el documento actualizado
-        );
-
-        // Si no se encuentra la tarea
-        if (!tareaActualizada) {
-            return res.status(404).json({ mensaje: "Tarea no encontrada." });
-        }
-
-        res.status(200).json(tareaActualizada);
+      const tarea = await Tarea.findByIdAndUpdate(
+        id, 
+        { completada: false },  // Cambia el estado a pendiente
+        { new: true }  // Devuelve la tarea actualizada
+      );
+      if (!tarea) {
+        return res.status(404).json({ mensaje: "Tarea no encontrada." });
+      }
+      res.status(200).json(tarea); // Devuelve la tarea actualizada
     } catch (error) {
-        res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
+      res.status(500).json({ mensaje: "Error al actualizar la tarea", error });
     }
-});
+  });
 
 // Iniciar el servidor
 app.listen(PORT, () => {
