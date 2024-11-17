@@ -37,7 +37,7 @@ Este proyecto es una aplicación de gestión de tareas desarrollada con Angular,
 ## Interfaz
 
 ### Home
-![Vista del home de la aplicación](https://raw.Celesgz/tallerAgenda/tree/main/lista-de-tareas/public/01-interfaz)
+![Vista del home de la aplicación](https://github.com/Celesgz/tallerAgenda/tree/main/lista-de-tareas/public/01-interfaz)
 
 ### Agregar Tarea
 ![Vista del popup de agregar tarea](https://raw.Celesgz/tallerAgenda/tree/main/lista-de-tareas/public/02-interfaz)
