@@ -174,7 +174,9 @@
                                         <button (click)="marcarPendiente(tarea)" *ngIf="tarea.completada" class="check-button"  style=" background-color: green;">
                                             <i class="fas fa-check-circle" style="color: black;"></i>
                                         </button>                                        
-                                        <button class="edit"><i class="fas fa-pencil-alt"></i></button>
+                                        <button class="edit" (click)="abrirEditor(tarea)">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>                                        
                                         <button (click)="eliminarTarea(tarea._id)">Eliminar</button>
                                     </div>
                             </div>
