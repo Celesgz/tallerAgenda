@@ -46,4 +46,4 @@ Este proyecto es una aplicación de gestión de tareas desarrollada con Angular,
 ![Vista de la tarea guardada](https://raw.Celesgz/tallerAgenda/tree/main/lista-de-tareas/public/03-interfaz.png)
 
 ### Tarea completada
-![Vista de la tarea completada](https://raw.Celesgz/tallerAgenda/tree/main/lista-de-tareas/public/04-interfaz.png)
+![Vista de la tarea completada](./lista-de-tareas/public/04-interfaz.png)
