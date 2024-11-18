@@ -28,7 +28,7 @@ Este proyecto es una aplicación de gestión de tareas desarrollada con Angular,
 
 2. Instalación de dependencias: en las carpetas tareas-backend y lista-de-tareas utiliza el comando ***'npm install'*** para instalar las dependencias utilizadas en el proyecto.
 3. En la carpeta tareas-backend usa el comando ***'node server.js'*** para ejecutar el backend de la aplicación.(Debes tener previamente instalado MongoDB, si no es asi descargalo de su [página oficial](https://www.mongodb.com/try/download/community))
-4. En la carpeta lista-de-tareas  usa el comando ***'npm start'*** para ejecutar el frontend de la aplicación.
+4. En la carpeta lista-de-tareas  usa el comando ***'npm start'*** o ***'ng serve'*** para ejecutar el frontend de la aplicación.
 
 ## Uso
 1. Navega a http://localhost:4200 para utilzar nuestra aplicación.
