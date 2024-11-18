@@ -61,4 +61,4 @@ Este proyecto es una aplicación de gestión de tareas desarrollada con Angular,
 
 ### Tarea completada
 ![Vista de la tarea completada](./lista-de-tareas/public/04-interfaz.png)
-- Una vez marcada como completada pasa a la columna de completadas donde puede ser eliminada, eliminada o marcarla nuevamente como pendiente (en caso de haber marcado por error la opcion de completada).
+- Una vez marcada como completada pasa a la columna de completadas donde puede ser eliminada, editada o marcarla nuevamente como pendiente (en caso de haber marcado por error la opcion de completada).
