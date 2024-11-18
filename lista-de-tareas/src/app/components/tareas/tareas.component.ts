@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TareaService } from '../../services/tarea.service'; // Asegúrate de que el servicio esté importado
+import { TareaService } from '../../services/tarea.service'; 
 import { Tarea } from '../../models/tarea.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -27,7 +27,6 @@ export class TareasComponent implements OnInit {
   }; 
   mostrarPopup: boolean = false;
 
-  // Declaración de las propiedades de fecha y hora
   currentDate: string = '';  
   currentTime: string = '';  
 
@@ -50,7 +49,7 @@ export class TareasComponent implements OnInit {
     });
   }
   agregarTarea(): void {
-    console.log('Nueva tarea antes de enviar:', this.nuevaTarea); // Verifica que prioridad y categoría estén llenas
+    console.log('Nueva tarea antes de enviar:', this.nuevaTarea);
     this.tareaService.crearTarea(this.nuevaTarea).subscribe(() => {
       this.obtenerTareas();
       this.nuevaTarea = { titulo: '', descripcion: '', completada: false, prioridad: '', categoria: '', _id: '' }; // Resetea los datos
@@ -85,10 +84,10 @@ export class TareasComponent implements OnInit {
   }
 
   marcarCompletada(tarea: Tarea): void {
-    if (tarea._id) { // Usamos _id en lugar de id
+    if (tarea._id) { // Usamos _id 
       this.tareaService.marcarCompletada(tarea._id).subscribe({
         next: (tareaActualizada) => {
-          // Aquí actualizamos la lista de tareas localmente
+          //  actualizamos la lista de tareas localmente
           const tareaIndex = this.tareas.findIndex(t => t._id === tarea._id);
           if (tareaIndex !== -1) {
             this.tareas[tareaIndex].completada = true; // Marca la tarea como completada
